@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'VIKAR DATA',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -15,6 +16,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Uu58DQ9ONbmgwl-Doj6HwNa8A7NSsxbK',
+            'baseUrl' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +45,17 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'categories' => 'data/categories',
+                'good-groups' => 'data/good-groups',
+                'goods' => 'data/goods',
+                'install-items' => 'data/install-items',
+                'install-item/<id:\d+>' => 'data/install-item?id=<id>',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

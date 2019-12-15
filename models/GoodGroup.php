@@ -9,12 +9,13 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property string $description
+ * @property string $thickness_of
  * @property int $category_id
+ * @property string $img
  *
  * @property Good[] $goods
  * @property Category $category
- * @property GoodGroupImg[] $goodGroupImgs
- * @property Img[] $imgs
  */
 class GoodGroup extends \yii\db\ActiveRecord
 {
@@ -32,9 +33,12 @@ class GoodGroup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id'], 'required'],
+            [['name', 'thickness_of', 'category_id'], 'required'],
+            [['description'], 'string'],
             [['category_id'], 'integer'],
             [['name'], 'string', 'max' => 45],
+            [['thickness_of'], 'string', 'max' => 50],
+            [['img'], 'string', 'max' => 100],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -46,8 +50,11 @@ class GoodGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'category_id' => 'Category ID',
+            'name' => 'Наименование',
+            'description' => 'Описание',
+            'thickness_of' => 'Толщина',
+            'category_id' => 'Категория',
+            'img' => 'Картинка',
         ];
     }
 
@@ -65,21 +72,5 @@ class GoodGroup extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGoodGroupImgs()
-    {
-        return $this->hasMany(GoodGroupImg::className(), ['good_group_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImgs()
-    {
-        return $this->hasMany(Img::className(), ['id' => 'img_id'])->viaTable('good_group_img', ['good_group_id' => 'id']);
     }
 }

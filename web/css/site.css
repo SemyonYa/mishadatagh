@@ -113,3 +113,96 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/*
+* IMAGE MANAGER
+*/
+.images {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+    margin: 3px 3px 0 0;
+    background-size: cover;
+    background-position: center center;
+}
+
+.image-chose-btn {
+    font-size: 16px;
+    color: darkcyan;
+    cursor: pointer;
+}
+
+.remove-image {
+    color: darkred;
+    float: right;
+}
+
+
+#VikarModal .close {
+    color: darkred;
+    opacity: 1;
+}
+#VikarModal .modal-dialog {
+    height: calc(100vh - 60px);
+}
+
+#VikarModal .modal-content {
+    height: 100%;
+}
+
+#VikarModal .modal-body {
+    height: calc(100% - 60px);
+}
+
+@media (min-width: 768px) {
+    #VikarModal .modal-dialog {
+        width: 700px;
+        height: calc(100vh - 60px);
+        margin: 30px auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    #VikarModal .modal-dialog {
+        width: 900px;
+        margin: 30px auto;
+    }
+}
+
+.modal-images {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.modal-image {
+    width: 150px;
+    height: 150px;
+    margin: 3px 3px 0 0;
+    background-size: cover;
+    background-position: center center;
+}
+
+.Vikar-image-manager-btn {
+    font-size: 32px;
+    color: darkcyan;
+}
+
+.img-preview {
+    width: 100px;
+    height: auto;
+}

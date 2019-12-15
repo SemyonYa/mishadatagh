@@ -12,9 +12,8 @@ use Yii;
  * @property string $works
  * @property string $recommendations
  * @property string $as_result
+ * @property string $img
  *
- * @property InstallImg[] $installImgs
- * @property Img[] $imgs
  * @property InstallItemGood[] $installItemGoods
  * @property Good[] $goods
  */
@@ -36,7 +35,7 @@ class InstallItem extends \yii\db\ActiveRecord
         return [
             [['name', 'works', 'recommendations', 'as_result'], 'required'],
             [['works', 'recommendations', 'as_result'], 'string'],
-            [['name'], 'string', 'max' => 100],
+            [['name', 'img'], 'string', 'max' => 100],
         ];
     }
 
@@ -47,27 +46,12 @@ class InstallItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'works' => 'Works',
-            'recommendations' => 'Recommendations',
-            'as_result' => 'As Result',
+            'name' => 'Наименование',
+            'works' => 'Работы',
+            'recommendations' => 'Рекомендации',
+            'as_result' => 'Результаты',
+            'img' => 'Картинка',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getInstallImgs()
-    {
-        return $this->hasMany(InstallImg::className(), ['install_item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImgs()
-    {
-        return $this->hasMany(Img::className(), ['id' => 'img_id'])->viaTable('install_img', ['install_item_id' => 'id']);
     }
 
     /**

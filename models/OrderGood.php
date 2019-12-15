@@ -5,23 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "install_item_good".
+ * This is the model class for table "order_good".
  *
- * @property int $install_item_id
+ * @property int $order_id
  * @property int $good_id
  * @property int $quantity
+ * @property int $current_price
  *
  * @property Good $good
- * @property InstallItem $installItem
+ * @property Order $order
  */
-class InstallItemGood extends \yii\db\ActiveRecord
+class OrderGood extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'install_item_good';
+        return 'order_good';
     }
 
     /**
@@ -30,11 +31,11 @@ class InstallItemGood extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['install_item_id', 'good_id', 'quantity'], 'required'],
-            [['install_item_id', 'good_id', 'quantity'], 'integer'],
-            [['install_item_id', 'good_id'], 'unique', 'targetAttribute' => ['install_item_id', 'good_id']],
+            [['order_id', 'good_id', 'quantity', 'current_price'], 'required'],
+            [['order_id', 'good_id', 'quantity', 'current_price'], 'integer'],
+            [['order_id', 'good_id'], 'unique', 'targetAttribute' => ['order_id', 'good_id']],
             [['good_id'], 'exist', 'skipOnError' => true, 'targetClass' => Good::className(), 'targetAttribute' => ['good_id' => 'id']],
-            [['install_item_id'], 'exist', 'skipOnError' => true, 'targetClass' => InstallItem::className(), 'targetAttribute' => ['install_item_id' => 'id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
     }
 
@@ -44,9 +45,10 @@ class InstallItemGood extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'install_item_id' => 'Установка',
+            'order_id' => 'Заказ',
             'good_id' => 'Товар',
             'quantity' => 'Количество',
+            'current_price' => 'Цена',
         ];
     }
 
@@ -61,8 +63,8 @@ class InstallItemGood extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInstallItem()
+    public function getOrder()
     {
-        return $this->hasOne(InstallItem::className(), ['id' => 'install_item_id']);
+        return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 }

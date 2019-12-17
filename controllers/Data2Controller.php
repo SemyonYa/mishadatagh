@@ -55,7 +55,19 @@ class Data2Controller extends Controller
         return Json::encode(InstallItem::find()->all());
     }
 
-    public function actionInstallItemGoods() {
-        return Json::encode(InstallItemGood::find()->all());
+    public function actionInstallItem($id) {
+        return Json::encode(InstallItem::findOne($id));
+    }
+
+    public function actionInstallItemGoods($install_item_id) {
+        $ii = InstallItem::findOne($install_item_id);
+        $goods = [];
+        foreach ($ii->installItemGoods as $ii_good) {
+            $goods[] = [
+                'good' => $ii_good->good,
+                'q' => $ii_good->quantity
+            ];
+        }
+        return Json::encode($goods);
     }
 }

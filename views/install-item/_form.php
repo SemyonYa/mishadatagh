@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'as_result')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'img')->hiddenInput() ?>
-    <img src="/web/images/<?= $model->img ?: 'fake.svg' ?>" class="img-preview" id="VikarImgPreview"data-toggle="modal" data-target="#VikarModal" onclick="LoadImageManager('install-item-img')" alt="Нужно выбрать другое изображение...">
+    <img src="/web/images/<?= $model->img ?: 'fake.svg' ?>" class="img-preview" id="VikarImgPreview"data-toggle="modal" data-target="#VikarModal" onclick="LoadImageManager('installitem-img')" alt="Нужно выбрать другое изображение...">
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

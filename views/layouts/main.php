@@ -44,6 +44,7 @@ AppAsset::register($this);
                 ['label' => 'Группы товаров', 'url' => ['/good-group/index']],
                 ['label' => 'Товары', 'url' => ['/good/index']],
                 ['label' => 'Установка', 'url' => ['/install-item/index']],
+                ['label' => 'Магазины', 'url' => ['/shop/index']],
                 ['label' => 'Менеджер изображений', 'url' => ['/image/list']],
                 Yii::$app->user->isGuest ? (['label' => 'Вход', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')

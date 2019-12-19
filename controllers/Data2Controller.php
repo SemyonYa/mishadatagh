@@ -7,6 +7,7 @@ use app\models\Good;
 use app\models\GoodGroup;
 use app\models\InstallItem;
 use app\models\InstallItemGood;
+use app\models\Shop;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -69,5 +70,9 @@ class Data2Controller extends Controller
             ];
         }
         return Json::encode($goods);
+    }
+
+    public function actionShops() {
+        return Json::encode(Shop::find()->all());
     }
 }

@@ -21,7 +21,7 @@ class Data2Controller extends Controller
             'corsFilter' => [
                 'class' => \yii\filters\Cors::className(),
                 'cors' => [
-                    'Origin' => ['http://localhost:4200', 'http://localhost:8100', 'http://vikar.injini.ru'],
+                    'Origin' => ['http://localhost:4200', 'http://localhost:8100', 'http://vikar.injini.ru', 'http://vikar-auto.injini.ru'],
                     'Access-Control-Allow-Origin' => true,
                     'Access-Control-Allow-Credentials' => true,
                     'Access-Control-Request-Method' => ['POST'],

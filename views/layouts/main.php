@@ -1,8 +1,5 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -73,25 +70,17 @@ AppAsset::register($this);
         <p class="text-center">&copy; Vikar Auto | DATA <?= date('Y') ?></p>
     </footer>
 
-    <?php $this->endBody() ?>
-</body>
-
-</html>
-<?php $this->endPage() ?>
-
-
-
-<!-- Триггер кнопка модали-->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#OstroModal">
+    <!-- Триггер кнопка модали-->
+    <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#OstroModal">
   Launch demo modal
 </button> -->
 
-<!-- Модаль -->
-<div class="modal fade" id="VikarModal" tabindex="-1" role="dialog" aria-labelledby="VikarModalLabel" data-input-id="-">
-    Загрузка...
-</div>
+    <!-- Модаль -->
+    <div class="modal fade" id="VikarModal" tabindex="-1" role="dialog" aria-labelledby="VikarModalLabel" data-input-id="-">
+        Загрузка...
+    </div>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 
 </html>

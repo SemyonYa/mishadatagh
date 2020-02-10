@@ -39,7 +39,25 @@ class Data2Controller extends Controller
             ],
         ];
     }
+    public function actionFull() {
+        $categories = Category::find()->asArray()->all();
+        foreach ($categories as $cid => $category) {
+            $good_groups = GoodGroup::find()->where(['category_id' => $category['id']])->asArray()->all();
+            // var_dump($category);
+            // var_dump($good_groups);die;
+            $goods = [];
+            foreach ($good_groups as $ggid => $good_group) {
+                $goods = Good::find()->where(['good_group_id' => $good_group['id']])->asArray()->all();
+                $good_groups[$ggid]['goods'] = $goods;
+            }
+            $categories[$cid]['good_groups'] = $good_groups;
+        }
+        // echo '<pre>';
+        // var_dump($categories);
+        return Json::encode($categories);
+    }
 
+    // OLD
     public function actionCategories() {
         return Json::encode(Category::find()->all());
     }
@@ -50,6 +68,10 @@ class Data2Controller extends Controller
     
     public function actionGoods($good_group_id) {
         return Json::encode(Good::find()->where(['good_group_id' => $good_group_id])->all());
+    }
+
+    public function actionGood($id) {
+        return Json::encode(Good::findOne($id));
     }
 
     public function actionInstallItems() {

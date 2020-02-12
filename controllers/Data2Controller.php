@@ -16,7 +16,8 @@ class Data2Controller extends Controller
 {
     public $enableCsrfValidation = false;
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'corsFilter' => [
                 'class' => \yii\filters\Cors::className(),
@@ -39,12 +40,11 @@ class Data2Controller extends Controller
             ],
         ];
     }
-    public function actionFull() {
+    public function actionFullCategories()
+    {
         $categories = Category::find()->asArray()->all();
         foreach ($categories as $cid => $category) {
             $good_groups = GoodGroup::find()->where(['category_id' => $category['id']])->asArray()->all();
-            // var_dump($category);
-            // var_dump($good_groups);die;
             $goods = [];
             foreach ($good_groups as $ggid => $good_group) {
                 $goods = Good::find()->where(['good_group_id' => $good_group['id']])->asArray()->all();
@@ -52,37 +52,58 @@ class Data2Controller extends Controller
             }
             $categories[$cid]['good_groups'] = $good_groups;
         }
-        // echo '<pre>';
-        // var_dump($categories);
         return Json::encode($categories);
     }
 
+    public function actionFullInstallItems()
+    {
+        $install_items = InstallItem::find()->asArray()->all();
+        foreach ($install_items as $ii_id => $ii) {
+            $install_item_goods = InstallItemGood::find()
+                ->where(['install_item_id' => $ii['id']])
+                ->asArray()
+                ->all();
+            foreach ($install_item_goods as $iig_id => $ii_good) {
+                $install_item_goods[$iig_id]['good'] = Good::findOne($ii_good['good_id']);
+            }
+            $install_items[$ii_id]['install_item_goods'] = $install_item_goods;
+        }
+        return Json::encode($install_items);
+    }
+
     // OLD
-    public function actionCategories() {
+    public function actionCategories()
+    {
         return Json::encode(Category::find()->all());
     }
-    
-    public function actionGoodGroups($category_id) {
+
+    public function actionGoodGroups($category_id)
+    {
         return Json::encode(GoodGroup::find()->where(['category_id' => $category_id])->all());
     }
-    
-    public function actionGoods($good_group_id) {
+
+    public function actionGoods($good_group_id)
+    {
         return Json::encode(Good::find()->where(['good_group_id' => $good_group_id])->all());
     }
 
-    public function actionGood($id) {
+    public function actionGood($id)
+    {
         return Json::encode(Good::findOne($id));
     }
 
-    public function actionInstallItems() {
+    public function actionInstallItems()
+    {
         return Json::encode(InstallItem::find()->all());
     }
 
-    public function actionInstallItem($id) {
+    public function actionInstallItem($id)
+    {
         return Json::encode(InstallItem::findOne($id));
     }
 
-    public function actionInstallItemGoods($install_item_id) {
+    public function actionInstallItemGoods($install_item_id)
+    {
         $ii = InstallItem::findOne($install_item_id);
         $goods = [];
         foreach ($ii->installItemGoods as $ii_good) {
@@ -94,7 +115,8 @@ class Data2Controller extends Controller
         return Json::encode($goods);
     }
 
-    public function actionShops() {
+    public function actionShops()
+    {
         return Json::encode(Shop::find()->all());
     }
 }
